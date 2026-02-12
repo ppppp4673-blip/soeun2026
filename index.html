@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | 소은</title>
+  <meta name="description" content="소은의 포트폴리오 - 웹 개발자">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ============================
+       Book Container
+  ============================= -->
+  <div class="book">
+
+    <!-- ========================
+         LEAF 1: Page 1 (Front) + Page 2 (Back)
+    ========================= -->
+    <div class="page" data-leaf="0">
+
+      <!-- PAGE 1: 표지 -->
+      <div class="page_front">
+        <div class="page_content cover_page">
+          <div class="cover_line anim_line"></div>
+          <h1 class="cover_title" data-split>Portfolio</h1>
+          <p class="cover_subtitle anim" data-delay="500">Web Developer</p>
+          <div class="cover_line anim_line" data-delay="300"></div>
+          <p class="cover_name anim_fade" data-delay="700">소 은</p>
+          <span class="page_number">01</span>
+        </div>
+      </div>
+
+      <!-- PAGE 2: 자기소개 -->
+      <div class="page_back">
+        <div class="page_content about_page">
+          <h2 data-split>About Me</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <p class="about_text anim" data-delay="400">
+            안녕하세요! 사용자 경험을 중요시하는 웹 개발자입니다.
+            창의적인 인터랙션과 깔끔한 코드로 가치를 만들어갑니다.
+          </p>
+          <div class="info_grid">
+            <div class="info_item anim" data-delay="500">
+              <div class="label">이름</div>
+              <div class="value">소은</div>
+            </div>
+            <div class="info_item anim" data-delay="600">
+              <div class="label">생년월일</div>
+              <div class="value">2000.01.01</div>
+            </div>
+            <div class="info_item anim" data-delay="700">
+              <div class="label">이메일</div>
+              <div class="value">soeun@email.com</div>
+            </div>
+            <div class="info_item anim" data-delay="800">
+              <div class="label">위치</div>
+              <div class="value">서울, 대한민국</div>
+            </div>
+          </div>
+          <span class="page_number">02</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================
+         LEAF 2: Page 3 (Front) + Page 4 (Back)
+    ========================= -->
+    <div class="page" data-leaf="1">
+
+      <!-- PAGE 3: 스킬 -->
+      <div class="page_front">
+        <div class="page_content skills_page">
+          <h2 data-split>Skills</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <div class="skill_list">
+            <div class="skill_item anim_left" data-delay="400">
+              <div class="skill_header">
+                <span>HTML5</span><span class="skill_percent" data-target="90">0%</span>
+              </div>
+              <div class="skill_bar">
+                <div class="skill_fill" data-width="90"></div>
+              </div>
+            </div>
+            <div class="skill_item anim_left" data-delay="550">
+              <div class="skill_header">
+                <span>CSS3 / SASS</span><span class="skill_percent" data-target="85">0%</span>
+              </div>
+              <div class="skill_bar">
+                <div class="skill_fill" data-width="85"></div>
+              </div>
+            </div>
+            <div class="skill_item anim_left" data-delay="700">
+              <div class="skill_header">
+                <span>JavaScript</span><span class="skill_percent" data-target="80">0%</span>
+              </div>
+              <div class="skill_bar">
+                <div class="skill_fill" data-width="80"></div>
+              </div>
+            </div>
+            <div class="skill_item anim_left" data-delay="850">
+              <div class="skill_header">
+                <span>React</span><span class="skill_percent" data-target="70">0%</span>
+              </div>
+              <div class="skill_bar">
+                <div class="skill_fill" data-width="70"></div>
+              </div>
+            </div>
+            <div class="skill_item anim_left" data-delay="1000">
+              <div class="skill_header">
+                <span>Figma / Design</span><span class="skill_percent" data-target="75">0%</span>
+              </div>
+              <div class="skill_bar">
+                <div class="skill_fill" data-width="75"></div>
+              </div>
+            </div>
+          </div>
+          <span class="page_number">03</span>
+        </div>
+      </div>
+
+      <!-- PAGE 4: 프로젝트 1 -->
+      <div class="page_back">
+        <div class="page_content project_page">
+          <h2 data-split>Project 01</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <div class="project_card anim_scale" data-delay="400">
+            <div class="project_image">
+              <i class="fas fa-laptop-code anim_bounce" data-delay="700"></i>
+            </div>
+            <div class="project_info">
+              <div class="project_title anim" data-delay="600">포트폴리오 웹사이트</div>
+              <div class="project_desc anim" data-delay="700">
+                인터랙티브 북 플립 효과를 활용한 개인 포트폴리오 사이트.
+                CSS 3D Transform과 JavaScript로 구현한 페이지 전환 효과가 특징입니다.
+              </div>
+              <div class="project_tags">
+                <span class="anim_pop" data-delay="800">HTML</span>
+                <span class="anim_pop" data-delay="900">CSS</span>
+                <span class="anim_pop" data-delay="1000">JavaScript</span>
+              </div>
+            </div>
+          </div>
+          <span class="page_number">04</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================
+         LEAF 3: Page 5 (Front) + Page 6 (Back)
+    ========================= -->
+    <div class="page" data-leaf="2">
+
+      <!-- PAGE 5: 프로젝트 2 -->
+      <div class="page_front">
+        <div class="page_content project_page">
+          <h2 data-split>Project 02</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <div class="project_card anim_scale" data-delay="400">
+            <div class="project_image">
+              <i class="fas fa-mobile-alt anim_bounce" data-delay="700"></i>
+            </div>
+            <div class="project_info">
+              <div class="project_title anim" data-delay="600">반응형 쇼핑몰</div>
+              <div class="project_desc anim" data-delay="700">
+                모바일 퍼스트 반응형 쇼핑몰 웹사이트. 상품 필터링,
+                장바구니, 결제 프로세스를 구현했습니다.
+              </div>
+              <div class="project_tags">
+                <span class="anim_pop" data-delay="800">React</span>
+                <span class="anim_pop" data-delay="900">Node.js</span>
+                <span class="anim_pop" data-delay="1000">MongoDB</span>
+              </div>
+            </div>
+          </div>
+          <span class="page_number">05</span>
+        </div>
+      </div>
+
+      <!-- PAGE 6: 프로젝트 3 -->
+      <div class="page_back">
+        <div class="page_content project_page">
+          <h2 data-split>Project 03</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <div class="project_card anim_scale" data-delay="400">
+            <div class="project_image">
+              <i class="fas fa-palette anim_bounce" data-delay="700"></i>
+            </div>
+            <div class="project_info">
+              <div class="project_title anim" data-delay="600">UI/UX 디자인 시스템</div>
+              <div class="project_desc anim" data-delay="700">
+                일관된 사용자 경험을 위한 디자인 시스템 구축.
+                컴포넌트 라이브러리와 스타일 가이드를 포함합니다.
+              </div>
+              <div class="project_tags">
+                <span class="anim_pop" data-delay="800">Figma</span>
+                <span class="anim_pop" data-delay="900">Storybook</span>
+                <span class="anim_pop" data-delay="1000">CSS</span>
+              </div>
+            </div>
+          </div>
+          <span class="page_number">06</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================
+         LEAF 4: Page 7 (Front) + Page 8 (Back)
+    ========================= -->
+    <div class="page" data-leaf="3">
+
+      <!-- PAGE 7: 경력/학력 -->
+      <div class="page_front">
+        <div class="page_content experience_page">
+          <h2 data-split>Experience</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <div class="timeline">
+            <div class="timeline_item anim" data-delay="400">
+              <div class="timeline_year">2024 - 현재</div>
+              <div class="timeline_title">웹 개발자</div>
+              <div class="timeline_desc">프론트엔드 개발 및 UI/UX 설계</div>
+            </div>
+            <div class="timeline_item anim" data-delay="600">
+              <div class="timeline_year">2023</div>
+              <div class="timeline_title">EZEN 아카데미</div>
+              <div class="timeline_desc">웹 퍼블리싱 & 프론트엔드 과정 수료</div>
+            </div>
+            <div class="timeline_item anim" data-delay="800">
+              <div class="timeline_year">2022</div>
+              <div class="timeline_title">대학교 졸업</div>
+              <div class="timeline_desc">컴퓨터공학과 학사</div>
+            </div>
+            <div class="timeline_item anim" data-delay="1000">
+              <div class="timeline_year">2021</div>
+              <div class="timeline_title">인턴십</div>
+              <div class="timeline_desc">웹 서비스 기획 및 프론트엔드 개발 보조</div>
+            </div>
+          </div>
+          <span class="page_number">07</span>
+        </div>
+      </div>
+
+      <!-- PAGE 8: 연락처 -->
+      <div class="page_back">
+        <div class="page_content contact_page">
+          <h2 data-split>Contact</h2>
+          <div class="section_line anim_line" data-delay="300"></div>
+          <p class="contact_text anim_fade" data-delay="400">
+            프로젝트 협업이나 문의가 있으시면 편하게 연락주세요!
+          </p>
+          <div class="contact_list">
+            <a class="contact_item anim_left" data-delay="500" href="mailto:soeun@email.com">
+              <div class="contact_icon anim_bounce" data-delay="600">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact_info">
+                <div class="contact_label">Email</div>
+                <div class="contact_value">soeun@email.com</div>
+              </div>
+            </a>
+            <a class="contact_item anim_left" data-delay="650" href="https://github.com/" target="_blank">
+              <div class="contact_icon anim_bounce" data-delay="750">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="contact_info">
+                <div class="contact_label">GitHub</div>
+                <div class="contact_value">github.com/soeun</div>
+              </div>
+            </a>
+            <a class="contact_item anim_left" data-delay="800" href="tel:010-0000-0000">
+              <div class="contact_icon anim_bounce" data-delay="900">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="contact_info">
+                <div class="contact_label">Phone</div>
+                <div class="contact_value">010-0000-0000</div>
+              </div>
+            </a>
+          </div>
+          <span class="page_number">08</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================
+       Navigation
+  ============================= -->
+  <button class="nav_btn prev" aria-label="이전 페이지"></button>
+  <button class="nav_btn next" aria-label="다음 페이지"></button>
+
+  <!-- ============================
+       Page Indicators
+  ============================= -->
+  <div class="page_indicators">
+    <div class="dot active" data-page="0"></div>
+    <div class="dot" data-page="1"></div>
+    <div class="dot" data-page="2"></div>
+    <div class="dot" data-page="3"></div>
+    <div class="dot" data-page="4"></div>
+  </div>
+
+  <!-- ============================
+       Scroll Hint
+  ============================= -->
+  <div class="scroll_hint">
+    <div class="mouse"></div>
+    <span>Scroll</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

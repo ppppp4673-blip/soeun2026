@@ -1,0 +1,1052 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Sree+Krushnadevaraya&family=Catamaran:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+
+/* ========================================
+   CSS Variables
+======================================== */
+:root {
+  --margin: 80px;
+  --background: #0f0f1a;
+  --perspective: 1800px;
+  --transition_duration: 1s;
+  --transition_delay: 0.2s;
+  --transition: transform var(--transition_duration) var(--transition_delay), z-index 0s 0.5s;
+  --accent: #ffce14;
+  --accent_dim: rgba(255, 206, 20, 0.3);
+  --text_light: #f0f0f0;
+  --text_dim: rgba(240, 240, 240, 0.6);
+  --page_shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+  --gradient_dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  --gradient_accent: linear-gradient(135deg, #ffce14 0%, #ff9a14 100%);
+}
+
+/* ========================================
+   Reset & Base
+======================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Noto Sans KR", "Catamaran", sans-serif;
+  color: var(--text_light);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   Book Container
+======================================== */
+.book {
+  width: calc(100% - var(--margin));
+  height: calc(100% - var(--margin));
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  perspective: var(--perspective);
+  box-shadow: var(--page_shadow);
+  max-width: 1300px;
+  max-height: 700px;
+}
+
+/* ========================================
+   Page (each leaf = front + back)
+======================================== */
+.page {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: var(--transition);
+  cursor: default;
+  will-change: transform;
+}
+
+.page:nth-child(1) {
+  z-index: 4;
+}
+
+.page:nth-child(2) {
+  z-index: 3;
+}
+
+.page:nth-child(3) {
+  z-index: 2;
+}
+
+.page:nth-child(4) {
+  z-index: 1;
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+  z-index: 10;
+}
+
+/* ========================================
+   Page Front & Back Faces
+======================================== */
+.page_front,
+.page_back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.page_front {
+  z-index: 2;
+  background: var(--gradient_dark);
+}
+
+.page_back {
+  z-index: 1;
+  transform: rotateY(180deg);
+  background: var(--gradient_dark);
+}
+
+/* ========================================
+   Page Content Layout
+======================================== */
+.page_content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page_content::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255, 206, 20, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ========================================
+   Page Number
+======================================== */
+.page_number {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--text_dim);
+  letter-spacing: 2px;
+  font-family: "Catamaran", sans-serif;
+}
+
+/* ========================================
+   Navigation Controls
+======================================== */
+.nav_btn {
+  position: absolute;
+  z-index: 50;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.nav_btn:hover {
+  box-shadow: 0 0 0 8px var(--accent_dim);
+  background: rgba(255, 206, 20, 0.1);
+}
+
+.nav_btn.prev {
+  left: 25px;
+}
+
+.nav_btn.next {
+  right: 25px;
+}
+
+.nav_btn::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+.nav_btn.prev::before {
+  transform: rotate(-135deg);
+  margin-left: 3px;
+}
+
+.nav_btn.next::before {
+  transform: rotate(45deg);
+  margin-right: 3px;
+}
+
+/* ========================================
+   Page Indicators
+======================================== */
+.page_indicators {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.page_indicators .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page_indicators .dot.active {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent_dim);
+}
+
+.page_indicators .dot:hover {
+  background: rgba(255, 206, 20, 0.5);
+}
+
+/* ========================================
+   Scroll Hint
+======================================== */
+.scroll_hint {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 100;
+  opacity: 0.6;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.scroll_hint.hidden {
+  opacity: 0;
+}
+
+.scroll_hint span {
+  font-size: 11px;
+  color: var(--text_dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.scroll_hint .mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid var(--accent);
+  border-radius: 11px;
+  position: relative;
+}
+
+.scroll_hint .mouse::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: scroll_wheel 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll_wheel {
+  0% {
+    opacity: 1;
+    top: 6px;
+  }
+
+  50% {
+    opacity: 0.3;
+    top: 16px;
+  }
+
+  100% {
+    opacity: 1;
+    top: 6px;
+  }
+}
+
+/* ========================================
+   ANIMATION SYSTEM
+======================================== */
+
+/* -- Base anim (fade up) -- */
+.anim {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.anim.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -- Fade in only -- */
+.anim_fade {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.anim_fade.active {
+  opacity: 1;
+}
+
+/* -- Slide from left -- */
+.anim_left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.anim_left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* -- Slide from right -- */
+.anim_right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.anim_right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* -- Scale pop -- */
+.anim_pop {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.anim_pop.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* -- Scale up (cards) -- */
+.anim_scale {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.anim_scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* -- Split character -- */
+.split_char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.split_char.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -- Line expand -- */
+.anim_line {
+  width: 0;
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.anim_line.active {
+  width: 60px;
+}
+
+/* -- Bounce icon -- */
+.anim_bounce {
+  opacity: 0;
+  transform: scale(0) rotate(-15deg);
+  transition: opacity 0.3s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.anim_bounce.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* -- Timeline line grow -- */
+.timeline_line_anim {
+  height: 0 !important;
+  transition: height 0.8s ease;
+}
+
+.timeline_line_anim.active {
+  height: 100% !important;
+}
+
+/* -- Glow pulse for timeline dots -- */
+@keyframes glow_pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 4px var(--accent_dim);
+  }
+
+  50% {
+    box-shadow: 0 0 12px var(--accent);
+  }
+}
+
+.timeline_item.active::before {
+  animation: glow_pulse 1.5s ease infinite;
+}
+
+/* ========================================
+   COVER PAGE
+======================================== */
+.cover_page {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  text-align: center;
+}
+
+.cover_page .cover_title {
+  font-family: "Sree Krushnadevaraya", serif;
+  font-size: 52px;
+  color: var(--accent);
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.cover_page .cover_subtitle {
+  font-size: 16px;
+  color: var(--text_dim);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.cover_page .cover_line {
+  height: 2px;
+  background: var(--gradient_accent);
+  margin: 0 auto 30px;
+}
+
+.cover_page .cover_name {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text_light);
+  letter-spacing: 6px;
+}
+
+/* ========================================
+   ABOUT PAGE
+======================================== */
+.about_page h2 {
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.about_page .section_line {
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 24px;
+}
+
+.about_page .about_text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text_dim);
+  text-align: center;
+  max-width: 400px;
+}
+
+.about_page .info_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.about_page .info_item {
+  text-align: center;
+  padding: 16px 12px;
+  border: 1px solid rgba(255, 206, 20, 0.15);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.about_page .info_item:hover {
+  border-color: var(--accent);
+  background: rgba(255, 206, 20, 0.05);
+}
+
+.about_page .info_item .label {
+  font-size: 11px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.about_page .info_item .value {
+  font-size: 14px;
+  color: var(--text_light);
+}
+
+/* ========================================
+   SKILLS PAGE
+======================================== */
+.skills_page h2 {
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.skills_page .section_line {
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 24px;
+}
+
+.skill_list {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill_item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill_item .skill_header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text_light);
+}
+
+.skill_item .skill_bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill_item .skill_fill {
+  height: 100%;
+  background: var(--gradient_accent);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.skill_item .skill_percent {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========================================
+   PROJECT PAGES
+======================================== */
+.project_page h2 {
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.project_page .section_line {
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 20px;
+}
+
+.project_card {
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid rgba(255, 206, 20, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.project_card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(255, 206, 20, 0.08);
+}
+
+.project_card .project_image {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #16213e, #1a1a2e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.project_card .project_image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 40%, rgba(255, 206, 20, 0.05) 100%);
+}
+
+.project_card .project_info {
+  padding: 20px;
+}
+
+.project_card .project_title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text_light);
+  margin-bottom: 8px;
+}
+
+.project_card .project_desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text_dim);
+  margin-bottom: 12px;
+}
+
+.project_card .project_tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.project_card .project_tags span {
+  font-size: 11px;
+  padding: 3px 10px;
+  border: 1px solid rgba(255, 206, 20, 0.25);
+  border-radius: 20px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+/* ========================================
+   EXPERIENCE PAGE
+======================================== */
+.experience_page h2 {
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.experience_page .section_line {
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 24px;
+}
+
+.timeline {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: rgba(255, 206, 20, 0.25);
+}
+
+.timeline_item {
+  position: relative;
+}
+
+.timeline_item::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent_dim);
+}
+
+.timeline_item .timeline_year {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.timeline_item .timeline_title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text_light);
+  margin-bottom: 2px;
+}
+
+.timeline_item .timeline_desc {
+  font-size: 12px;
+  color: var(--text_dim);
+  line-height: 1.5;
+}
+
+/* ========================================
+   CONTACT PAGE
+======================================== */
+.contact_page {
+  text-align: center;
+}
+
+.contact_page h2 {
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.contact_page .section_line {
+  height: 2px;
+  background: var(--accent);
+  margin: 0 auto 24px;
+}
+
+.contact_page .contact_text {
+  font-size: 14px;
+  color: var(--text_dim);
+  margin-bottom: 30px;
+  max-width: 350px;
+}
+
+.contact_list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.contact_item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 206, 20, 0.15);
+  border-radius: 8px;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact_item:hover {
+  border-color: var(--accent);
+  background: rgba(255, 206, 20, 0.05);
+  transform: translateX(4px);
+}
+
+.contact_item .contact_icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 206, 20, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.contact_item .contact_info .contact_label {
+  font-size: 11px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact_item .contact_info .contact_value {
+  font-size: 14px;
+  color: var(--text_light);
+}
+
+/* ========================================
+   RESPONSIVE — Portrait Tablet
+======================================== */
+@media (max-width: 1024px) and (orientation: portrait) {
+  :root {
+    --margin: 40px;
+  }
+
+  .book {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .page {
+    width: 100%;
+    height: 50%;
+    right: auto;
+    top: 0;
+    transform-origin: center bottom;
+  }
+
+  .page.flipped {
+    transform: rotateX(180deg);
+  }
+
+  .page_back {
+    transform: rotateX(180deg);
+  }
+
+  .page_content {
+    padding: 30px 24px;
+  }
+
+  .cover_page .cover_title {
+    font-size: 36px;
+  }
+
+  .cover_page .cover_name {
+    font-size: 18px;
+  }
+
+  .nav_btn {
+    top: auto;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+  }
+
+  .nav_btn.prev {
+    top: 15px;
+  }
+
+  .nav_btn.prev::before {
+    transform: rotate(-45deg);
+    margin-top: 3px;
+  }
+
+  .nav_btn.next {
+    bottom: 15px;
+    top: auto;
+  }
+
+  .nav_btn.next::before {
+    transform: rotate(135deg);
+    margin-bottom: 3px;
+  }
+
+  .page_indicators {
+    right: 15px;
+    bottom: auto;
+    top: 50%;
+    left: auto;
+    transform: translateY(-50%);
+    flex-direction: column;
+  }
+}
+
+/* ========================================
+   RESPONSIVE — Mobile
+======================================== */
+@media (max-width: 768px) {
+  :root {
+    --margin: 16px;
+  }
+
+  .book {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .page {
+    width: 100%;
+    height: 100%;
+    right: auto;
+    top: 0;
+    transform-origin: center top;
+  }
+
+  .page.flipped {
+    transform: rotateX(180deg);
+  }
+
+  .page_back {
+    transform: rotateX(180deg);
+  }
+
+  .page_content {
+    padding: 40px 24px;
+  }
+
+  .cover_page .cover_title {
+    font-size: 32px;
+  }
+
+  .cover_page .cover_subtitle {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .cover_page .cover_name {
+    font-size: 16px;
+    letter-spacing: 4px;
+  }
+
+  .about_page h2,
+  .skills_page h2,
+  .project_page h2,
+  .experience_page h2,
+  .contact_page h2 {
+    font-size: 22px;
+  }
+
+  .about_page .info_grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .project_card .project_image {
+    height: 120px;
+  }
+
+  .nav_btn {
+    top: auto;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+  }
+
+  .nav_btn.prev {
+    top: 10px;
+  }
+
+  .nav_btn.prev::before {
+    transform: rotate(-45deg);
+    margin-top: 3px;
+  }
+
+  .nav_btn.next {
+    bottom: 10px;
+    top: auto;
+  }
+
+  .nav_btn.next::before {
+    transform: rotate(135deg);
+    margin-bottom: 3px;
+  }
+
+  .page_indicators {
+    right: 10px;
+    bottom: auto;
+    top: 50%;
+    left: auto;
+    transform: translateY(-50%);
+    flex-direction: column;
+  }
+
+  .page_indicators .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scroll_hint {
+    bottom: 30px;
+  }
+
+  .skill_list {
+    gap: 10px;
+  }
+
+  .timeline {
+    gap: 14px;
+  }
+}
+
+/* ========================================
+   Flip edge shadow
+======================================== */
+.page.flipped .page_front::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.15), transparent);
+  pointer-events: none;
+}
