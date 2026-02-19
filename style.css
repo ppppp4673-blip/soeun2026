@@ -11,9 +11,9 @@
   --transition_duration: 1s;
   --transition_delay: 0.2s;
   --transition: transform var(--transition_duration) var(--transition_delay), z-index 0s 0.5s;
-  --accent: #ffce14;
+  --accent: #f5f4f0;
   --accent_dim: rgba(255, 206, 20, 0.3);
-  --text_light: #f0f0f0;
+  --text_light: #eeeeee;
   --text_dim: rgba(240, 240, 240, 0.6);
   --page_shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
   --gradient_dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -54,8 +54,8 @@ body {
   transform: translateY(-50%);
   perspective: var(--perspective);
   box-shadow: var(--page_shadow);
-  max-width: 1300px;
-  max-height: 700px;
+  max-width: 1500px;
+  max-height: 800px;
 }
 
 /* ========================================
@@ -108,19 +108,19 @@ body {
   -webkit-backface-visibility: hidden;
   overflow: hidden;
   will-change: transform;
+  background-color: #0f3460;
 }
 
 .page_front {
   z-index: 2;
   background: var(--gradient_dark);
 }
-
 .page_back {
   z-index: 1;
   transform: rotateY(180deg);
-  background: var(--gradient_dark);
-}
+  background: var(--gradient_dark);}
 
+  
 /* ========================================
    Page Content Layout
 ======================================== */
@@ -145,6 +145,7 @@ body {
   left: -50%;
   background: radial-gradient(ellipse at 30% 50%, rgba(255, 206, 20, 0.03) 0%, transparent 60%);
   pointer-events: none;
+  background-color: #e59eb0;
 }
 
 /* ========================================
@@ -460,7 +461,7 @@ body {
 
 .cover_page .cover_title {
   font-family: "Sree Krushnadevaraya", serif;
-  font-size: 52px;
+  font-size: 80px;
   color: var(--accent);
   letter-spacing: -2px;
   line-height: 1.1;
@@ -493,10 +494,10 @@ body {
    ABOUT PAGE
 ======================================== */
 .about_page h2 {
-  font-size: 28px;
+  font-size: 40px;
   color: var(--accent);
-  margin-bottom: 8px;
-  letter-spacing: 2px;
+  margin-bottom: 20px;
+  letter-spacing: 10px;
   text-transform: uppercase;
 }
 
@@ -507,11 +508,12 @@ body {
 }
 
 .about_page .about_text {
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.8;
   color: var(--text_dim);
   text-align: center;
-  max-width: 400px;
+  max-width: 700px;
+  letter-spacing: 1px;
 }
 
 .about_page .info_grid {
@@ -525,7 +527,7 @@ body {
 
 .about_page .info_item {
   text-align: center;
-  padding: 16px 12px;
+  padding: 20px 14px;
   border: 1px solid rgba(255, 206, 20, 0.15);
   border-radius: 8px;
   transition: all 0.3s;
@@ -537,23 +539,25 @@ body {
 }
 
 .about_page .info_item .label {
-  font-size: 11px;
+  font-size: 20px;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 5px;
   margin-bottom: 4px;
+
 }
 
 .about_page .info_item .value {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--text_light);
+  font-weight: 700;
 }
 
 /* ========================================
    SKILLS PAGE
 ======================================== */
 .skills_page h2 {
-  font-size: 28px;
+  font-size: 40px;
   color: var(--accent);
   margin-bottom: 8px;
   letter-spacing: 2px;
@@ -608,14 +612,15 @@ body {
 }
 
 /* ========================================
-   PROJECT PAGES
+   PROJECT 
 ======================================== */
 .project_page h2 {
-  font-size: 28px;
+  font-size: 40px;
   color: var(--accent);
   margin-bottom: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  margin-top: -30px;
 }
 
 .project_page .section_line {
@@ -626,11 +631,13 @@ body {
 
 .project_card {
   width: 100%;
-  max-width: 440px;
+  max-width: 700px;
+  min-height: 500px;
   border: 1px solid rgba(255, 206, 20, 0.15);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s;
+  min-width: 550px;
 }
 
 .project_card:hover {
@@ -640,7 +647,7 @@ body {
 
 .project_card .project_image {
   width: 100%;
-  height: 160px;
+  height: 350px;
   background: linear-gradient(135deg, #16213e, #1a1a2e);
   display: flex;
   align-items: center;
@@ -649,6 +656,12 @@ body {
   color: var(--accent);
   position: relative;
   overflow: hidden;
+}
+.project_card .project_image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* ← 이미지 꽉 채움 */
+  display: block;
 }
 
 .project_card .project_image::after {
@@ -663,14 +676,14 @@ body {
 }
 
 .project_card .project_title {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 30x;
+  font-weight: 900;
   color: var(--text_light);
-  margin-bottom: 8px;
+  margin-bottom: 40px;
 }
 
 .project_card .project_desc {
-  font-size: 13px;
+  font-size: 20px;
   line-height: 1.6;
   color: var(--text_dim);
   margin-bottom: 12px;
@@ -683,12 +696,13 @@ body {
 }
 
 .project_card .project_tags span {
-  font-size: 11px;
+  font-size: 15px;
   padding: 3px 10px;
   border: 1px solid rgba(255, 206, 20, 0.25);
   border-radius: 20px;
   color: var(--accent);
   letter-spacing: 0.5px;
+  justify-content: flex-end;  
 }
 
 /* ========================================
@@ -752,7 +766,7 @@ body {
 }
 
 .timeline_item .timeline_title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text_light);
   margin-bottom: 2px;
