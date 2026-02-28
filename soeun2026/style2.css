@@ -32,8 +32,13 @@ body {
   font-family: "Noto Sans KR", "Catamaran", sans-serif;
   color: var(--text_light);
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
-
+/* 전체 래퍼 */
+.page_back {  /* 각 섹션 */
+  height: 100vh;
+  scroll-snap-align: start;
+}
 /* ========================================
    Book Container
 ======================================== */

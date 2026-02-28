@@ -6,17 +6,17 @@
 ======================================== */
 :root {
   --margin: 80px;
-  --background: #0f0f1a;
+  --background:  #111111ee;
   --perspective: 1800px;
   --transition_duration: 1s;
   --transition_delay: 0.2s;
   --transition: transform var(--transition_duration) var(--transition_delay), z-index 0s 0.5s;
   --accent: #f5f4f0;
   --accent_dim: rgba(255, 206, 20, 0.3);
-  --text_light: #eeeeee;
+  --text_light: hsl(0, 0%, 0%);
   --text_dim: rgba(240, 240, 240, 0.6);
   --page_shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
-  --gradient_dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  --gradient_dark: linear-gradient(135deg, #d3d3d3 100%);
   --gradient_accent: linear-gradient(135deg, #ffce14 0%, #ff9a14 100%);
 }
 
@@ -32,7 +32,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: var(--background);
+  background-color: var(--background);
   height: 100vh;
   overflow: hidden;
   font-family: "Noto Sans KR", "Catamaran", sans-serif;
@@ -110,10 +110,26 @@ body {
   will-change: transform;
   background-color: #0f3460;
 }
-
+/* 프로젝트 설명 */
 .page_front {
   z-index: 2;
   background: var(--gradient_dark);
+}
+
+.page_front h2{
+  margin-top: -30px;
+}
+.page_front h3{
+  color: rgb(71, 66, 68);
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.page_front p{
+  font-size: 25px;
+  margin-bottom: 30px;
+  font-weight: 400;
 }
 .page_back {
   z-index: 1;
@@ -134,6 +150,8 @@ body {
   padding: 50px 40px;
   position: relative;
   overflow: hidden;
+background: #cac9c5;
+color: var(--gradient_dark);
 }
 
 .page_content::before {
@@ -145,7 +163,7 @@ body {
   left: -50%;
   background: radial-gradient(ellipse at 30% 50%, rgba(255, 206, 20, 0.03) 0%, transparent 60%);
   pointer-events: none;
-  background-color: #e59eb0;
+
 }
 
 /* ========================================
@@ -455,14 +473,14 @@ body {
    COVER PAGE
 ======================================== */
 .cover_page {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  background: var(--accent);
   text-align: center;
 }
 
 .cover_page .cover_title {
   font-family: "Sree Krushnadevaraya", serif;
   font-size: 80px;
-  color: var(--accent);
+  color: var(--gradient_dark);
   letter-spacing: -2px;
   line-height: 1.1;
   margin-bottom: 16px;
@@ -491,26 +509,27 @@ body {
 }
 
 /* ========================================
-   ABOUT PAGE
+   ABOUT PAGE 자기소개
 ======================================== */
 .about_page h2 {
   font-size: 40px;
-  color: var(--accent);
+  color: var(--gradient_dark);
   margin-bottom: 20px;
   letter-spacing: 10px;
   text-transform: uppercase;
+  font-weight: 400;
 }
 
 .about_page .section_line {
   height: 2px;
-  background: var(--accent);
+  background: var(--gradient_dark);
   margin-bottom: 24px;
 }
 
 .about_page .about_text {
   font-size: 20px;
   line-height: 1.8;
-  color: var(--text_dim);
+  color: var(--gradient_dark);
   text-align: center;
   max-width: 700px;
   letter-spacing: 1px;
@@ -529,86 +548,54 @@ body {
   text-align: center;
   padding: 20px 14px;
   border: 1px solid rgba(255, 206, 20, 0.15);
-  border-radius: 8px;
+  border-radius: 7px;
   transition: all 0.3s;
+  color: var(--background);
 }
 
 .about_page .info_item:hover {
-  border-color: var(--accent);
+  border-color: var(--gradient_dark);
   background: rgba(255, 206, 20, 0.05);
 }
 
 .about_page .info_item .label {
   font-size: 20px;
-  color: var(--accent);
+  color: var(--gradient_dark);
   text-transform: uppercase;
   letter-spacing: 5px;
   margin-bottom: 4px;
-
 }
 
 .about_page .info_item .value {
   font-size: 18px;
-  color: var(--text_light);
+  color: var(--gradient_dark);
   font-weight: 700;
 }
 
-/* ========================================
-   SKILLS PAGE
-======================================== */
-.skills_page h2 {
-  font-size: 40px;
-  color: var(--accent);
-  margin-bottom: 8px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.skills_page .section_line {
-  height: 2px;
-  background: var(--accent);
-  margin-bottom: 24px;
-}
-
-.skill_list {
-  width: 100%;
-  max-width: 420px;
+/* 스킬 */
+.tool_icons {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+.tool_icons h2 {
+  font-size: 20px;        /* 글자 크기 조절 */
+  font-weight: 700;       /* 굵기 조절 */
+  letter-spacing: 8px;    /* 자간 조절 */
+  color: #2d2020;         /* 글자 색상 */
+}
+.tool_icons img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
 }
 
-.skill_item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.skill_item .skill_header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: var(--text_light);
-}
-
-.skill_item .skill_bar {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.skill_item .skill_fill {
-  height: 100%;
-  background: var(--gradient_accent);
-  border-radius: 3px;
-  width: 0%;
-  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.skill_item .skill_percent {
-  font-variant-numeric: tabular-nums;
+.tool_icons img:hover {
+  transform: translateY(-4px) scale(1.1);  /* 호버시 올라오는 효과 */
 }
 
 /* ========================================
@@ -616,7 +603,7 @@ body {
 ======================================== */
 .project_page h2 {
   font-size: 40px;
-  color: var(--accent);
+  color: var(--gradient_dark);
   margin-bottom: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -625,7 +612,7 @@ body {
 
 .project_page .section_line {
   height: 2px;
-  background: var(--accent);
+  background: var(--gradient_dark);
   margin-bottom: 20px;
 }
 
@@ -641,7 +628,7 @@ body {
 }
 
 .project_card:hover {
-  border-color: var(--accent);
+  border-color: var(--gradient_dark);
   box-shadow: 0 8px 30px rgba(255, 206, 20, 0.08);
 }
 
@@ -678,7 +665,7 @@ body {
 .project_card .project_title {
   font-size: 30x;
   font-weight: 900;
-  color: var(--text_light);
+  color: var(--gradient_dark);
   margin-bottom: 40px;
 }
 
@@ -689,20 +676,41 @@ body {
   margin-bottom: 12px;
 }
 
-.project_card .project_tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
+  .project_card .project_tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
 
-.project_card .project_tags span {
-  font-size: 15px;
+  .project_card .project_tags span {
+    font-size: 15px;
+    padding: 3px 10px;
+    border: 1px solid rgba(255, 206, 20, 0.25);
+    border-radius: 20px;
+    color: var(--gradient_dark);
+    letter-spacing: 0.5px;
+    justify-content: flex-end;  
+  }
+.project_tags a {
+  display: inline-block;
+  font-size: 20px;
   padding: 3px 10px;
   border: 1px solid rgba(255, 206, 20, 0.25);
   border-radius: 20px;
-  color: var(--accent);
+  color: var(--gradient_dark);
   letter-spacing: 0.5px;
-  justify-content: flex-end;  
+  text-decoration: none;       /* 밑줄 제거 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.project_tags a:hover {
+  background: #f5c3e5;
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);  /* 살짝 올라오는 효과 */
 }
 
 /* ========================================
@@ -759,8 +767,8 @@ body {
 }
 
 .timeline_item .timeline_year {
-  font-size: 12px;
-  color: var(--accent);
+  font-size: 20px;
+  color: var(--gradient_dark);
   letter-spacing: 1px;
   margin-bottom: 4px;
 }
@@ -891,7 +899,8 @@ body {
   }
 
   .cover_page .cover_title {
-    font-size: 36px;
+    font-size: 20px;
+    color: var(--gradient_dark);
   }
 
   .cover_page .cover_name {

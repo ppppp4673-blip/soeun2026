@@ -11,8 +11,8 @@
   /* ========================================
      Constants
   ======================================== */
-  const TOTAL_PAGES =12;
-  const TOTAL_LEAVES = 8;
+  const TOTAL_PAGES = 20;
+  const TOTAL_LEAVES = 10;
   const ANIMATION_DURATION = 1200;
   const WHEEL_THRESHOLD = 50;
 
@@ -131,6 +131,13 @@
       }
     });
 
+    // 스킬 퍼센트 카운트업
+    face.querySelectorAll(".skill_percent").forEach((el) => {
+      const target = parseInt(el.dataset.target) || 0;
+      const delay = parseInt(el.closest(".skill_item")?.dataset.delay) || 400;
+      setTimeout(() => count_up(el, 0, target, 1000), delay);
+    });
+
     // 타임라인 아이템 글로우
     face.querySelectorAll(".timeline_item").forEach((item) => {
       const delay = parseInt(item.dataset.delay) || 0;
@@ -146,6 +153,16 @@
 
     face.querySelectorAll(".split_char").forEach((span) => {
       span.classList.remove("active");
+    });
+
+    // 스킬 바 리셋
+    face.querySelectorAll(".skill_fill").forEach((bar) => {
+      bar.style.width = "0%";
+    });
+
+    // 스킬 퍼센트 리셋
+    face.querySelectorAll(".skill_percent").forEach((el) => {
+      el.textContent = "0%";
     });
 
     // 타임라인 아이템 리셋
