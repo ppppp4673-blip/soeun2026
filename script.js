@@ -11,8 +11,8 @@
   /* ========================================
      Constants
   ======================================== */
-  const TOTAL_PAGES =12;
-  const TOTAL_LEAVES = 8;
+  const TOTAL_PAGES =20;
+  const TOTAL_LEAVES = 10;
   const ANIMATION_DURATION = 1200;
   const WHEEL_THRESHOLD = 50;
 
@@ -361,3 +361,18 @@
   init();
 })();
 
+const fileInput = document.getElementById('fileInput');
+  const previewImg = document.getElementById('previewImg');
+  const placeholder = document.getElementById('placeholder');
+
+  fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      previewImg.src = ev.target.result;
+      previewImg.style.display = 'block';
+      placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
