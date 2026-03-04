@@ -1,4 +1,3 @@
-
 /**
  * 📖 Book Portfolio — Page Flip Controller + Interactions
  * 마우스 휠 / 클릭 / 키보드 / 터치로 페이지 전환
@@ -11,9 +10,8 @@
   /* ========================================
      Constants
   ======================================== */
-  const TOTAL_PAGES =20;
-  const TOTAL_LEAVES = 10;
-  const ANIMATION_DURATION = 1200;
+  const TOTAL_PAGES = 14;
+  const TOTAL_LEAVES = 7;
   const WHEEL_THRESHOLD = 50;
 
   /* ========================================
@@ -35,7 +33,7 @@
   const scroll_hint = document.querySelector(".scroll_hint");
 
   /* ========================================
-     TEXT SPLIT — data-split 속성 가진 요소 처리
+     TEXT SPLIT
   ======================================== */
   function init_text_split() {
     document.querySelectorAll("[data-split]").forEach((el) => {
@@ -43,7 +41,6 @@
       const delay_base = parseInt(el.dataset.delay) || 0;
       el.textContent = "";
       el.setAttribute("aria-label", text);
-
       [...text].forEach((char, i) => {
         const span = document.createElement("span");
         span.className = "split_char";
@@ -55,83 +52,59 @@
   }
 
   /* ========================================
-     PAGE VISIBILITY — 어떤 면이 보이는지 계산
+     PAGE VISIBILITY
+     펼쳤을 때 보이는 두 면을 모두 반환
+     왼쪽 = 마지막으로 넘긴 leaf의 page_back
+     오른쪽 = 아직 안 넘긴 첫 번째 leaf의 page_front
   ======================================== */
+function get_visible_faces() {
+  const faces = [];
+  const flipped_count = current_page / 2;
 
-  /**
-   * current_page (0~8) 로부터 보이는 면(face) 인덱스 반환
-   * 0 → leaf0 front (page 1)
-   * 2 → leaf1 front (page 3)
-   * etc.
-   *
-   * 현재 보이는 면:
-   *   - 왼쪽: 직전에 flip된 leaf의 back face
-   *   - 오른쪽: 아직 flip 안된 첫 leaf의 front face
-   */
-  function get_visible_faces() {
-    const faces = [];
-    const flipped_count = current_page / 2;
-
-    // 왼쪽: 마지막으로 flip된 leaf의 back
-    if (flipped_count > 0) {
-      const leaf_idx = flipped_count - 1;
+  // 왼쪽: 마지막으로 flip된 leaf의 back
+  if (flipped_count > 0) {
+    const leaf_idx = flipped_count - 1;
+    if (pages[leaf_idx]) {
       const back_face = pages[leaf_idx].querySelector(".page_back");
       if (back_face) faces.push(back_face);
     }
+  }
 
-    // 오른쪽: flip 안된 첫 leaf의 front
-    if (flipped_count < TOTAL_LEAVES) {
-      const leaf_idx = flipped_count;
+  // 오른쪽: 아직 flip 안된 첫 leaf의 front
+  if (flipped_count < TOTAL_LEAVES) {
+    const leaf_idx = flipped_count;
+    if (pages[leaf_idx]) {
       const front_face = pages[leaf_idx].querySelector(".page_front");
       if (front_face) faces.push(front_face);
     }
-
-    return faces;
   }
 
-  function get_all_faces() {
-    const faces = [];
-    pages.forEach((page) => {
-      const front = page.querySelector(".page_front");
-      const back = page.querySelector(".page_back");
-      if (front) faces.push(front);
-      if (back) faces.push(back);
-    });
-    return faces;
-  }
-
+  return faces;
+}
   /* ========================================
      ANIMATION TRIGGER
   ======================================== */
-
   function activate_animations(face) {
-    // 일반 anim 클래스들
     const anim_selectors = ".anim, .anim_fade, .anim_left, .anim_right, .anim_pop, .anim_scale, .anim_bounce, .anim_line";
     face.querySelectorAll(anim_selectors).forEach((el) => {
       const delay = parseInt(el.dataset.delay) || 0;
       setTimeout(() => el.classList.add("active"), delay);
     });
 
-    // 스플릿 글자
     face.querySelectorAll("[data-split]").forEach((el) => {
       el.querySelectorAll(".split_char").forEach((span) => {
-        // transitionDelay가 이미 설정되어 있으므로 한번에 active 추가
         setTimeout(() => span.classList.add("active"), 100);
       });
     });
 
-    // 스킬 프로그레스 바 채우기
     face.querySelectorAll(".skill_fill").forEach((bar) => {
       const target_width = bar.dataset.width;
       if (target_width) {
         const delay = parseInt(bar.closest(".skill_item")?.dataset.delay) || 400;
-        setTimeout(() => {
-          bar.style.width = target_width + "%";
-        }, delay);
+        setTimeout(() => { bar.style.width = target_width + "%"; }, delay);
       }
     });
 
-    // 타임라인 아이템 글로우
     face.querySelectorAll(".timeline_item").forEach((item) => {
       const delay = parseInt(item.dataset.delay) || 0;
       setTimeout(() => item.classList.add("active"), delay);
@@ -143,37 +116,15 @@
     face.querySelectorAll(anim_selectors).forEach((el) => {
       el.classList.remove("active");
     });
-
     face.querySelectorAll(".split_char").forEach((span) => {
       span.classList.remove("active");
     });
-
-    // 타임라인 아이템 리셋
+    face.querySelectorAll(".skill_fill").forEach((bar) => {
+      bar.style.width = "0%";
+    });
     face.querySelectorAll(".timeline_item").forEach((item) => {
       item.classList.remove("active");
     });
-  }
-
-  /* ========================================
-     COUNT UP ANIMATION
-  ======================================== */
-  function count_up(element, start, end, duration) {
-    const start_time = performance.now();
-
-    function update(current_time) {
-      const elapsed = current_time - start_time;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease-out
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current_val = Math.round(start + (end - start) * eased);
-      element.textContent = current_val + "%";
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-    }
-
-    requestAnimationFrame(update);
   }
 
   /* ========================================
@@ -203,14 +154,13 @@
     update_indicators();
     update_nav_buttons();
 
-    // 스크롤 힌트 숨김
     if (scroll_hint) scroll_hint.classList.add("hidden");
 
-    // 전환 후 새로운 면 활성화
+    // 페이지 전환 후 양쪽 면 모두 애니메이션 활성화
     setTimeout(() => {
       get_visible_faces().forEach((face) => activate_animations(face));
       is_animating = false;
-    }, 800);
+    }, 1200);
   }
 
   function next_page() {
@@ -227,10 +177,12 @@
 
   function flip_leaf(leaf_index, flip) {
     if (leaf_index < 0 || leaf_index >= TOTAL_LEAVES) return;
-    if (flip) {
-      pages[leaf_index].classList.add("flipped");
-    } else {
-      pages[leaf_index].classList.remove("flipped");
+    if (pages[leaf_index]) {
+      if (flip) {
+        pages[leaf_index].classList.add("flipped");
+      } else {
+        pages[leaf_index].classList.remove("flipped");
+      }
     }
   }
 
@@ -261,7 +213,6 @@
   window.addEventListener("wheel", (e) => {
     e.preventDefault();
     if (is_animating) return;
-
     wheel_accumulator += e.deltaY;
     if (Math.abs(wheel_accumulator) >= WHEEL_THRESHOLD) {
       if (wheel_accumulator > 0) next_page();
@@ -351,8 +302,6 @@
     current_page = 0;
     update_indicators();
     update_nav_buttons();
-
-    // 첫 페이지(cover) 애니메이션 지연 시작
     setTimeout(() => {
       get_visible_faces().forEach((face) => activate_animations(face));
     }, 500);
@@ -361,10 +310,11 @@
   init();
 })();
 
+// 파일 업로드 (HTML에 fileInput 요소가 있을 때만 실행)
 const fileInput = document.getElementById('fileInput');
+if (fileInput) {
   const previewImg = document.getElementById('previewImg');
   const placeholder = document.getElementById('placeholder');
-
   fileInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -376,3 +326,4 @@ const fileInput = document.getElementById('fileInput');
     };
     reader.readAsDataURL(file);
   });
+}
