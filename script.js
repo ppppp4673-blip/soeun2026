@@ -57,30 +57,30 @@
      왼쪽 = 마지막으로 넘긴 leaf의 page_back
      오른쪽 = 아직 안 넘긴 첫 번째 leaf의 page_front
   ======================================== */
-function get_visible_faces() {
-  const faces = [];
-  const flipped_count = current_page / 2;
+  function get_visible_faces() {
+    const faces = [];
+    const flipped_count = current_page / 2;
 
-  // 왼쪽: 마지막으로 flip된 leaf의 back
-  if (flipped_count > 0) {
-    const leaf_idx = flipped_count - 1;
-    if (pages[leaf_idx]) {
-      const back_face = pages[leaf_idx].querySelector(".page_back");
-      if (back_face) faces.push(back_face);
+    // 왼쪽: 마지막으로 flip된 leaf의 back
+    if (flipped_count > 0) {
+      const leaf_idx = flipped_count - 1;
+      if (pages[leaf_idx]) {
+        const back_face = pages[leaf_idx].querySelector(".page_back");
+        if (back_face) faces.push(back_face);
+      }
     }
-  }
 
-  // 오른쪽: 아직 flip 안된 첫 leaf의 front
-  if (flipped_count < TOTAL_LEAVES) {
-    const leaf_idx = flipped_count;
-    if (pages[leaf_idx]) {
-      const front_face = pages[leaf_idx].querySelector(".page_front");
-      if (front_face) faces.push(front_face);
+    // 오른쪽: 아직 flip 안된 첫 leaf의 front
+    if (flipped_count < TOTAL_LEAVES) {
+      const leaf_idx = flipped_count;
+      if (pages[leaf_idx]) {
+        const front_face = pages[leaf_idx].querySelector(".page_front");
+        if (front_face) faces.push(front_face);
+      }
     }
-  }
 
-  return faces;
-}
+    return faces;
+  }
   /* ========================================
      ANIMATION TRIGGER
   ======================================== */
@@ -105,6 +105,21 @@ function get_visible_faces() {
       }
     });
 
+    // Skill percent counter animation
+    face.querySelectorAll(".skill_percent").forEach((el) => {
+      const target = parseInt(el.dataset.target) || 0;
+      const delay = parseInt(el.closest(".skill_item")?.dataset.delay) || 400;
+      setTimeout(() => {
+        let current = 0;
+        const step = Math.ceil(target / 50);
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = current + "%";
+        }, 16);
+      }, delay);
+    });
+
     face.querySelectorAll(".timeline_item").forEach((item) => {
       const delay = parseInt(item.dataset.delay) || 0;
       setTimeout(() => item.classList.add("active"), delay);
@@ -121,6 +136,9 @@ function get_visible_faces() {
     });
     face.querySelectorAll(".skill_fill").forEach((bar) => {
       bar.style.width = "0%";
+    });
+    face.querySelectorAll(".skill_percent").forEach((el) => {
+      el.textContent = "0%";
     });
     face.querySelectorAll(".timeline_item").forEach((item) => {
       item.classList.remove("active");
@@ -315,11 +333,11 @@ const fileInput = document.getElementById('fileInput');
 if (fileInput) {
   const previewImg = document.getElementById('previewImg');
   const placeholder = document.getElementById('placeholder');
-  fileInput.addEventListener('change', function(e) {
+  fileInput.addEventListener('change', function (e) {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(ev) {
+    reader.onload = function (ev) {
       previewImg.src = ev.target.result;
       previewImg.style.display = 'block';
       placeholder.style.display = 'none';
