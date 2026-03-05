@@ -10,8 +10,8 @@
   /* ========================================
      Constants
   ======================================== */
-  const TOTAL_PAGES = 14;
-  const TOTAL_LEAVES = 7;
+  const TOTAL_PAGES = 12;
+  const TOTAL_LEAVES = 6;
   const WHEEL_THRESHOLD = 50;
 
   /* ========================================
