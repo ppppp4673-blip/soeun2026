@@ -135,13 +135,13 @@ body {
 
 .page_front h3 {
   color: rgb(71, 66, 68);
-  margin-bottom: 1.56vw;
+  margin-bottom: 1vw;
   font-weight: 500;
   font-size: 1.3vw;
 }
 
 .page_front p {
-  font-size: 1.3vw;
+  font-size: 1.4vw;
   margin-bottom: 1.56vw;
   font-weight: 400;
 }
@@ -530,15 +530,15 @@ body {
 
 /* Skills 스킬 */
 .skills_page {
-  background: #f0f4f8 !important;
+  background: #f5f4f1 !important;
 }
 
 .skills_page h2 {
-  color: #3b6b9e;
+  color: #0d1822;
 }
 
 .skills_page .section_line {
-  background: #3b6b9e;
+  background: #132334;
 }
 
 .skills_page .skill_fill {
@@ -598,6 +598,11 @@ body {
   background: #eae8e3 !important;
 }
 
+[data-leaf="3"] .about_page h2{
+    font-size: 1.68vw;  /* ← 작게 줄이기 */
+  white-space: nowrap;  
+  font-weight: 500;
+}
 [data-leaf="3"] .about_page h2,
 [data-leaf="3"] .about_page h3 {
   color: #8b6f47;
@@ -772,12 +777,13 @@ body {
    ABOUT PAGE 자기소개
 ======================================== */
 .about_page h2 {
-  font-size: 2.08vw;
+  font-size:2.08vw;
   color: var(--gradient_dark);
-  margin-bottom: 1.04vw;
+  margin-top: -50px;
   letter-spacing: 0.52vw;
   text-transform: uppercase;
   font-weight: 400;
+  margin-bottom: 70px;
 }
 
 .about_page .section_line {
@@ -799,7 +805,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25vw;
-  margin-top: 1.25vw;
+  margin-top: 2.25vw;
   width: 100%;
   max-width: 31.25vw;
 }
@@ -824,12 +830,13 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.26vw;
   margin-bottom: 0.21vw;
+   font-weight: 700;
 }
 
 .about_page .info_item .value {
   font-size: 0.94vw;
-  color: var(--gradient_dark);
-  font-weight: 700;
+  color: #534f4f;
+  font-weight: 600;
 }
 
 /* 스킬 */
@@ -849,15 +856,17 @@ body {
 }
 
 .tool_icons img {
-  width: 2.08vw;
-  height: 2.08vw;
+  width: 4vw;
+  height: 3.5vw;
   object-fit: contain;
   border-radius: 0.63vw;
   transition: transform 0.3s ease;
+  margin-bottom: 50px;
+  
 }
 
 .tool_icons img:hover {
-  transform: translateY(-0.21vw) scale(1.1);
+  transform: translateY(-0.33vw) scale(1.1);
 }
 
 /* ========================================
@@ -865,15 +874,16 @@ body {
 ======================================== */
 .skills_page h2 {
   font-size: 2.08vw;
-  color: #3b6b9e;
+  color: #1d3854;
   margin-bottom: 1.04vw;
   letter-spacing: 0.52vw;
   text-transform: uppercase;
   font-weight: 400;
+  margin-top: -50px;
 }
 
 .skills_page .section_line {
-  height: 2px;
+  height: 3px;
   background: #3b6b9e;
   margin-bottom: 1.25vw;
 }
@@ -936,7 +946,7 @@ body {
   margin-bottom: 2.08vw;
 }
 
-/* ── 프로젝트 카드 with mockup ── */
+── 프로젝트 카드 with mockup ──
 .project_card {
   width: 100%;
   max-width: 36.46vw;
@@ -987,7 +997,7 @@ body {
   z-index: 2;
 }
 
-.project_card:hover .mockup_overlay {
+/* .project_card:hover .mockup_overlay {
   opacity: 1;
 }
 
@@ -996,7 +1006,7 @@ body {
   position: absolute;
   inset: 0;
   background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.05) 100%);
-}
+} */
 
 /* 프로젝트 카드 이미지 등장 애니메이션 */
 .project_card.anim_scale {
@@ -1056,8 +1066,9 @@ body {
   display: flex;
   align-items: center;
   gap: 0.52vw;
-  font-size: 0.73vw;
+  font-size: 0.93vw;
   color: #555;
+  
 }
 
 .feature_item i {
@@ -1077,11 +1088,12 @@ body {
   padding: 0.26vw 0.73vw;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 1.04vw;
-  font-size: 0.57vw;
+  font-size: 0.67vw;
   font-weight: 600;
   letter-spacing: 1px;
   cursor: default;
   transition: background 0.2s;
+  margin-top: 20px;
 }
 
 .tech_tags span:hover {
@@ -1244,10 +1256,11 @@ body {
    Profile Image
 ======================================== */
 .about_page img {
-  width: 8.33vw;
-  border-radius: 50%;
+  width: 7.33vw;
+  border-radius: 45%;
   object-fit: cover;
   margin-bottom: 1.04vw;
+  margin-top: -60px;
 }
 
 /* ========================================

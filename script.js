@@ -345,3 +345,4 @@ if (fileInput) {
     reader.readAsDataURL(file);
   });
 }
+
