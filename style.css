@@ -745,7 +745,7 @@ body {
 .cover_page .cover_title {
   font-family: "Sree Krushnadevaraya", serif;
   font-size: 4.17vw;
-  color: var(--gradient_dark);
+  color: #241d20;
   letter-spacing: -2px;
   line-height: 1.1;
   margin-bottom: 0.83vw;
@@ -1177,7 +1177,7 @@ body {
    CONTACT PAGE
 ======================================== */
 .contact_page {
-  text-align: center;
+  text-align: left;
 }
 
 .contact_page h2 {
@@ -1186,6 +1186,7 @@ body {
   margin-bottom: 0.42vw;
   letter-spacing: 2px;
   text-transform: uppercase;
+  margin-top: -60px;
 }
 
 .contact_page .section_line {
@@ -1195,8 +1196,8 @@ body {
 }
 
 .contact_page .contact_text {
-  font-size: 0.73vw;
-  color: var(--text_dim);
+  font-size: 0.93vw;
+  color: #1b1d20;
   margin-bottom: 1.56vw;
   max-width: 18.23vw;
 }
